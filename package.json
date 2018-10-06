@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "husky": "^1.1.1",
+    "lint-staged": "^7.3.0",
+    "prettier-eslint-cli": "^4.7.1",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-scripts": "2.0.4"
@@ -12,7 +15,9 @@
     "build": "react-scripts build",
     "build-netlify": "react-scripts build && cp build/index.html build/404.html",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "prettier-eslint --write \"src/**/*.+(js|jsx)\"",
+    "prettier-dry-run": "prettier-eslint \"src/**/*.+(js|jsx)\" -l debug"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -22,5 +27,15 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "lint-staged": {
+    "*.js": [
+      "npm run lint --",
+      "git add"
+    ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all"
+  }
 }
